@@ -68,6 +68,20 @@ async def sticker_putin(interaction: discord.Interaction, sticker: str):
 
 
 
+class RequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'Hello, world!')
+
+def run_http_server():
+    server_address = ('', 8080) 
+    httpd = HTTPServer(server_address, RequestHandler)
+    httpd.serve_forever()
+
+
+run_http_server()
+
 
 bot.run(get_env('DISCORD_TOKEN'))
 
